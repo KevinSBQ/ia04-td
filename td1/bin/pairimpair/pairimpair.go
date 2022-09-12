@@ -16,4 +16,5 @@ func PairImpair() {
 			fmt.Printf("%v ", i)
 		}
 	}
+	fmt.Printf("\n\n")
 }
