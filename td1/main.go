@@ -7,6 +7,7 @@ import (
     "td1/bin/pairimpair"
 	"td1/pkg/toto"
     "td1/pkg/ex2slctab"
+    "td1/pkg/probleme"
 )
 
 func main() {
@@ -43,4 +44,10 @@ func main() {
     fmt.Println("Valeur Centrale(s) : ", ex2slctab.ValeurCentrales(sl2))
 
     ex2slctab.Compte(5, sl2)
+
+    fmt.Println(probleme.IsPalindrome("RADAR"))
+    fmt.Println(probleme.IsPalindrome("RADAE"))
+    dict := [...]string{"AGENT", "CHIEN", "COLOC", "ETANG", "ELLE", "GEANT", "NICHE", "RADAR"}
+    dictsl := dict[:]
+    fmt.Println(probleme.Palindromes(dictsl))
 }
