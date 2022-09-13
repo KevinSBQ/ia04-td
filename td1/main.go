@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"td1/bin/hello"
 	"td1/bin/hi"
-    "td1/bin/pairimpair"
+	"td1/bin/pairimpair"
+	"td1/pkg/ex2slctab"
+	"td1/pkg/probleme"
 	"td1/pkg/toto"
-    "td1/pkg/ex2slctab"
-    "td1/pkg/probleme"
 )
 
 func main() {
@@ -52,4 +53,47 @@ func main() {
     fmt.Println(probleme.Palindromes(dictsl))
     fmt.Println(probleme.Footprint("AGENT"))
     fmt.Println(probleme.Anagrams(dictsl))
+
+    dictfromfile := probleme.DictFromFile("dico-scrabble-fr.txt")
+    // fmt.Println(dictfromfile)
+
+    fmt.Println("Quel est le(s) plus long(s) palindromes de la langue française ?")
+    palindromesfromfile := probleme.Palindromes(dictfromfile)
+    sort.Slice(palindromesfromfile, func(i, j int) bool {
+        return len(palindromesfromfile[i]) < len(palindromesfromfile[j])
+    })
+    fmt.Println(palindromesfromfile[len(palindromesfromfile)-1])
+    anagramsfromfile := probleme.Anagrams(dictfromfile)
+
+    fmt.Println("Quels sont les anagrammes de agents ?")
+    fmt.Println(anagramsfromfile["AEGNT"])
+
+    fmt.Println("Quel(s) mot(s) de la langue française contien(nen)t le plus d’anagrammes ?")
+    values := make([][]string, 0, len(anagramsfromfile))
+    for  _, value := range anagramsfromfile {
+        values = append(values, value)
+    }
+    sort.Slice(values, func(i, j int) bool {
+        return len(values[i]) < len(values[j])
+    })
+    if len(values)-1 > 0 {
+        fmt.Println("Empreinte: ", probleme.Footprint(values[len(values)-1][0]))
+        fmt.Println(values[len(values)-1])
+    }
+    
+
+    fmt.Println("Existe-t-il un palindrome qui possède des anagrammes ?")
+    keys := make([]string, 0, len(anagramsfromfile))
+    for k := range anagramsfromfile {
+        keys = append(keys, k)
+    }
+    // fmt.Println(keys)
+    for _, p := range keys {
+        if probleme.IsPalindrome(p) {
+            // fmt.Println(p)
+            fmt.Printf("%v ", p)
+        }
+    }
+    fmt.Printf("\n")
+    // Non, il n'y a pas
 }
