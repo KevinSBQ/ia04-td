@@ -50,4 +50,6 @@ func main() {
     dict := [...]string{"AGENT", "CHIEN", "COLOC", "ETANG", "ELLE", "GEANT", "NICHE", "RADAR"}
     dictsl := dict[:]
     fmt.Println(probleme.Palindromes(dictsl))
+    fmt.Println(probleme.Footprint("AGENT"))
+    fmt.Println(probleme.Anagrams(dictsl))
 }
