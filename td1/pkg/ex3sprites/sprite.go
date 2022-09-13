@@ -26,5 +26,6 @@ func Collision(s1, s2 Sprite) *Rectangle{
 	if x1>x2 || y1>y2 {
 		return nil
 	}
-	return &Rectangle{*NewPoint2D(x1, y1), *NewPoint2D(x2, y2)} // NewRectangle()
+	// return &Rectangle{*NewPoint2D(x1, y1), *NewPoint2D(x2, y2)} // NewRectangle()
+	return NewRectangle(*NewPoint2D(x1, y1), *NewPoint2D(x2, y2))
 }
