@@ -162,16 +162,22 @@ func EqualConcInterup(tab1, tab2 []int, workerCount int) bool {
 			lastIndex++
 		}
 		go func(fi, li int, c,d chan struct{}){
+			// envoyer un n'importe signal dans channel completed a la fin de chaque fontion worker
 			defer func() {c <- struct{}{}}()
 			for i:= fi; i<li; i++ {
+				// check inside each worker at each iteration if there is a signal of inequality sent by other worker
+				// if it is the case, terminates the process (interruption)
+				// reduing rate reduces the check frequency of process termination criteria
+				// it's ok to check the existance of this signal at each iteration, but it cost time.
 				if rate := (len(tab1) / 10); rate ==0 || i%rate == 0{
-				select {
-					case <- d:
-						return
-					default:
+					select {
+						case <- d:
+							return
+						default:
+					}
 				}
-			}
 				if tab1[i] != tab2[i] {
+					// envoyer un n'importe signal dans channel done pour dire que deux tab n'est pas egale
 					d <- struct{}{}
 					return
 				}

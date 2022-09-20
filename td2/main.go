@@ -5,8 +5,9 @@ import (
 	"math"
 	"td2/pkg/ex1"
 	"td2/pkg/ex2"
-	"td2/pkg/ex3"
+	// "td2/pkg/ex3"
 	"td2/pkg/ex4"
+	"td2/pkg/ex5"
 	"time"
 )
 
@@ -40,9 +41,9 @@ func main(){
 	fmt.Printf("\n\n")
 
 /* EX3 */
-	ex3.Ba1()
-	ex3.Ba2()
-	ex3.Ba3()
+	// ex3.Ba1()
+	// ex3.Ba2()
+	// ex3.Ba3()
 	fmt.Printf("\n\n")
 
 /* EX4 */
@@ -71,20 +72,35 @@ func main(){
 		fmt.Println("Time escaped conc: ", time.Since(t1))
 	}
 
+	ex4.Fill(tab1[:], 10)
+	ex4.Fill(tab2[:], 10)
+
 	for j:=0; j<10; j++ {
 		fmt.Println("Equal Loop", j, "----------")
 		t1 = time.Now()
-		ex4.Equal(tab1[:], tab2[:])
+		res1 := ex4.Equal(tab1[:], tab2[:])
 		fmt.Println("Time escaped : ", time.Since(t1))
 		fmt.Println("EqualConc Loop", j, "----------")
 		t1 = time.Now()
-		ex4.EqualConc(tab1[:], tab2[:], number_worker)
+		res2 := ex4.EqualConc(tab1[:], tab2[:], number_worker)
 		fmt.Println("Time escaped conc: ", time.Since(t1))
 		fmt.Println("EqualConcInterup Loop", j, "----------")
 		t1 = time.Now()
-		ex4.EqualConcInterup(tab1[:], tab2[:], number_worker)
-		fmt.Println("Time escaped conc: ", time.Since(t1))
+		res3 := ex4.EqualConcInterup(tab1[:], tab2[:], number_worker)
+		fmt.Println("Time escaped concinterup: ", time.Since(t1))
+
+		fmt.Println(res1, res2, res3)
 	}
+	// Execution time needed: EqualConc < EqualConcInterup < Equal
+	// Write an read from a channel is time-costly
 
 	fmt.Printf("\n\n")
+
+	// cannot read and write at same time
+	// var cccc chan int
+	// cccc <- 5
+	// fmt.Println(<-cccc)
+
+/* EX5 */
+	ex5.RunPingPong()
 }
