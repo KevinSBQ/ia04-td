@@ -5,8 +5,7 @@ import (
 	"math"
 	"td2/pkg/ex1"
 	"td2/pkg/ex2"
-
-	// "td2/pkg/ex3"
+	"td2/pkg/ex3"
 	"td2/pkg/ex4"
 	"time"
 )
@@ -16,22 +15,35 @@ const number_worker = 11
 
 func main(){
 /* EX1 */
-	go ex1.CompteMsg(300, "Go 1")
-	go ex1.CompteMsg(300, "Go 2")
+	fmt.Printf("\n1.1\n")
+	ex1.Compte(100)
+	go ex1.Compte(100)
+
+	fmt.Printf("\n1.2\n")
+	go ex1.CompteMsg(100, "Go 1")
+	go ex1.CompteMsg(100, "Go 2")
+
+	fmt.Printf("\n1.3 1.4\n")
 	time.Sleep(100 * time.Millisecond)
 	for i:=0; i < 10; i++ {
 		go ex1.CompteMsgFromTo(i*10, (i+1)*10, fmt.Sprintf("Let's go %v", i))
 	}
 	time.Sleep(100 * time.Millisecond)
 
-	fmt.Printf("\n\n\n")
+	fmt.Printf("\n\n")
 
 /* EX2 */
 	ex2.Ex2_original()
 	ex2.Ex2_mutex()
 	ex2.Ex2_waitgroup()
 
-	fmt.Printf("\n\n\n")
+	fmt.Printf("\n\n")
+
+/* EX3 */
+	ex3.Ba1()
+	ex3.Ba2()
+	ex3.Ba3()
+	fmt.Printf("\n\n")
 
 /* EX4 */
 	var tab1, tab2 [big]int
@@ -74,5 +86,5 @@ func main(){
 		fmt.Println("Time escaped conc: ", time.Since(t1))
 	}
 
-	fmt.Printf("\n\n\n")
+	fmt.Printf("\n\n")
 }

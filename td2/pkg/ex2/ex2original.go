@@ -17,5 +17,5 @@ func Ex2_original() {
 
     fmt.Println("Appuyez sur entrée")
     fmt.Scanln()
-    fmt.Println("n:", n)
+    fmt.Println("Original Version: n:", n)
 }
