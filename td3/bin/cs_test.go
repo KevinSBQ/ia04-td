@@ -88,7 +88,8 @@ func TestApprovalSWF(t *testing.T) {
 		{2, 3},
 	}
 
-	res, _ := ApprovalSWF(prefs)
+	// res, _ := ApprovalSWF(prefs)
+	res, _ := ApprovalSWF(prefs, []int{1,0,1})
 
 	if res[1] != 2 {
 		t.Errorf("error, result for 1 should be 2, %d computed", res[1])
@@ -108,12 +109,13 @@ func TestApprovalSCF(t *testing.T) {
 		{2, 3},
 	}
 
-	res, err := ApprovalSCF(prefs)
+	// res, err := ApprovalSCF(prefs)
+	res, err := ApprovalSCF(prefs, []int{1,0,1})
 
 	if err != nil {
 		t.Error(err)
 	}
-
+	// t.Logf("%v",res)
 	if len(res) != 1 || res[0] != 1 {
 		t.Errorf("error, 1 should be the only best Alternative")
 	}
@@ -132,15 +134,20 @@ func TestCondorcetWinner(t *testing.T) {
 		{3, 1, 2},
 	}
 
-	alts := []Alternative{1, 2, 3}
+	// alts := []Alternative{1, 2, 3}
 
-	res1, _ := CondorcetWinner(alts, prefs1)
-	res2, _ := CondorcetWinner(alts, prefs2)
+	// res1, _ := CondorcetWinner(alts, prefs1)
+	// res2, _ := CondorcetWinner(alts, prefs2)
+
+	res1, _ := CondorcetWinner(prefs1)
+	res2, _ := CondorcetWinner(prefs2)
 
 	if len(res1) == 0 || res1[0] != 1 {
+		t.Logf("Your res1 : %v", res1)
 		t.Errorf("error, 1 should be the only best alternative for prefs1")
 	}
 	if len(res2) != 0 {
+		t.Logf("Your res2 : %v", res2)
 		t.Errorf("no best alternative for prefs2")
 	}
 }
