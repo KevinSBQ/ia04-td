@@ -38,7 +38,10 @@ func remove(slice []Alternative, s Alternative) []Alternative {
 // preference global
 func SWFFactory(swf func(p Profile) (Count, error), tiebreak func([]Alternative) (Alternative, error)) func(Profile) ([]Alternative, error) {
 	SWFProduct := func(pp Profile) ([]Alternative, error) {
-		count, _ := swf(pp)
+		count, errSWF := swf(pp)
+		if errSWF != nil {
+			return nil, errSWF
+		}
 		orderStrict := make([]Alternative, len(count))
 		for {
 			bestAlts := maxCount(count)
@@ -50,7 +53,10 @@ func SWFFactory(swf func(p Profile) (Count, error), tiebreak func([]Alternative)
 			} else {
 				// append to order list and remove from bestAlts one after another
 				for len(bestAlts) != 0 {
-					alt, _ := tiebreak(bestAlts)
+					alt, errTB := tiebreak(bestAlts)
+					if errTB != nil {
+						return nil, errTB
+					}
 					orderStrict = append(orderStrict, alt)
 					bestAlts = remove(bestAlts, alt)
 					// remove all proceeded alts from count map
