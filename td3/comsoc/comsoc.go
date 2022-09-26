@@ -64,6 +64,7 @@ func checkProfile(prefs Profile) error {
 			if lastPref == pref {
 				return errors.New("doublon preference")
 			}
+			lastPref = pref
 		}
 	}
 	return nil
@@ -82,6 +83,7 @@ func checkProfileAlternative(prefs Profile, alts []Alternative) error {
 		if lastPref == pref {
 			return errors.New("doublon alts")
 		}
+		lastPref = pref
 	}
 	return nil
 }

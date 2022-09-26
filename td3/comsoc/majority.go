@@ -13,7 +13,7 @@ func MajoritySWF(p Profile) (count Count, err error) {
 	return
 }
 
-// can be also implemented using maxCount
+// can be also implemented using maxCount()
 func MajoritySCF(p Profile) (bestAlts []Alternative, err error) {
 	count, err := MajoritySWF(p)
 	if err != nil {

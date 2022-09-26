@@ -1,6 +1,7 @@
 package comsoc
 
-import ()
+import (
+)
 
 func BordaSWF(p Profile) (Count, error) {
 	err := checkProfile(p)
