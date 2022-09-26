@@ -85,21 +85,3 @@ func checkProfileAlternative(prefs Profile, alts []Alternative) error {
 	}
 	return nil
 }
-
-func SWF(p Profile) (count Count, err error) {
-	if count == nil {
-		count = make(map[Alternative]int)
-	}
-	for _, pref := range p {
-		count[pref[0]]++
-	}
-	return
-}
-
-// func SCF(p Profile) (bestAlts []Alternative, err error) {
-// 	count, err := SWF(p)
-// 	best := Alternative(-1)
-// 	for i, score := range count {
-
-// 	}
-// }
