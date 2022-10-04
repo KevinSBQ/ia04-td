@@ -46,6 +46,21 @@ func maxCount(count Count) (bestAlts []Alternative) {
 	return
 }
 
+func minCount(count Count) (worstAlts []Alternative) {
+	minc := count[0]
+	for _, v := range count {
+		if v < minc {
+			minc = v
+		}
+	}
+	for k, v := range count {
+		if minc == v {
+			worstAlts = append(worstAlts, k)
+		}
+	}
+	return
+}
+
 // vérifie le profil donné, par ex. qu'ils sont tous complets et que chaque alternative n'apparaît qu'une seule fois par préférences
 func checkProfile(prefs Profile) error {
 	for _, prefsIndividual := range prefs {

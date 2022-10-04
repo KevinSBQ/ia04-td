@@ -38,16 +38,21 @@ func remove(slice []Alternative, s Alternative) []Alternative {
 // preference global
 func SWFFactory(swf func(p Profile) (Count, error), tiebreak func([]Alternative) (Alternative, error)) func(Profile) ([]Alternative, error) {
 	SWFProduct := func(pp Profile) ([]Alternative, error) {
+		// use swf method to get each candidates' score
 		count, errSWF := swf(pp)
 		if errSWF != nil {
 			return nil, errSWF
 		}
+		// create a strict order table to be returned
 		orderStrict := make([]Alternative, len(count))
 		for {
 			bestAlts := maxCount(count)
 			if len(bestAlts) == 0 {
+				// if no more elements in bestAlts, end of loop
 				break
 			} else if len(bestAlts) == 1 {
+				// if one single alt of high score, add it directly
+				// remove it from the count table
 				orderStrict = append(orderStrict, bestAlts[0])
 				delete(count, bestAlts[0])
 			} else {
