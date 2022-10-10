@@ -1,6 +1,8 @@
 package comsoc
 
-import ()
+import (
+	. "td4/vote"
+)
 
 func STV_SWF(p Profile) (Count, error){
 	err := checkProfile(p)
